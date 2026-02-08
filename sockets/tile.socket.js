@@ -1,9 +1,16 @@
-// import "./sockets/tile.socket";
+import { claimTile } from "../models/tile.model";
+import "dotenv/config";
 
-// io.on("connection", (socket) => {
-//   console.log("User connected:", socket.id);
+export default (io) => {
+  io.on("connection", (socket) => {
+    socket.on("claim_tile", async ({ tileId, userId, color }) => {
+      const updatedTile = await claimTile(tileId, userId, color);
 
-//   socket.on("hello", (data) => {
-//     console.log("Client says:", data);
-//   });
-// });
+      if (updatedTile) {
+        io.emit("tile_updated", updatedTile);
+      } else {
+        socket.emit("tile_taken", tileId);
+      }
+    });
+  });
+};
