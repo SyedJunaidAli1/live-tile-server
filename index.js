@@ -2,6 +2,7 @@ import "dotenv/config";
 import app from "./app.js";
 import http from "http";
 import { Server } from "socket.io";
+import pool from "./config/db.js";
 
 const PORT = process.env.PORT;
 
@@ -24,6 +25,14 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
   });
+});
+
+pool.query("SELECT NOW()", (err, res) => {
+  if (err) {
+    console.error("DB connection error:", err);
+  } else {
+    console.log("DB connected:", res.rows[0]);
+  }
 });
 
 // Start server
