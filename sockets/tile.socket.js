@@ -1,21 +1,9 @@
-require("./sockets/tile.socket")(io);
+// import "./sockets/tile.socket";
 
-import "./sockets/tile.socket";
+// io.on("connection", (socket) => {
+//   console.log("User connected:", socket.id);
 
-// export default (io) => {
-//   io.on("connection", (socket) => {
-//     console.log("Tile user connected:", socket.id);
-
-//     socket.on("claim_tile", (tileId) => {
-//       // claim logic here later
-//     });
+//   socket.on("hello", (data) => {
+//     console.log("Client says:", data);
 //   });
-// };
-
-io.on("connection", (socket) => {
-  console.log("User connected:", socket.id);
-
-  socket.on("hello", (data) => {
-    console.log("Client says:", data);
-  });
-});
+// });

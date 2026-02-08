@@ -9,9 +9,11 @@ const PORT = process.env.PORT;
 const server = http.createServer(app);
 
 // Attach socket
+// console.log("FRONTEND:", process.env.FRONTEND_ENDPOINT);
+
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: process.env.FRONTEND_ENDPOINT,
   },
 });
 
