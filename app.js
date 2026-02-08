@@ -9,7 +9,7 @@ app.use(express.json());
 
 // Health route (VERY smart to have)
 app.get("/", (req, res) => {
-  res.send("Server is running...");
+  res.send("Server is running and healthy...");
 });
 
 export default app;
