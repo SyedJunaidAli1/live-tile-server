@@ -7,6 +7,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+import tileRoutes from "./routes/tile.routes.js";
+
+app.use("/tiles", tileRoutes);
+
+
 // Health route (VERY smart to have)
 app.get("/", (req, res) => {
   res.send("Server is running and healthy...");

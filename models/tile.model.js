@@ -14,3 +14,11 @@ export async function claimTile(tileId, userId, color) {
 
   return result.rows[0]; // undefined if taken
 }
+
+export async function getTiles() {
+  const result = await pool.query(
+    "SELECT * FROM tiles ORDER BY id"
+  );
+
+  return result.rows;
+}
