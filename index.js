@@ -3,6 +3,7 @@ import app from "./app.js";
 import http from "http";
 import { Server } from "socket.io";
 import pool from "./config/db.js";
+import tileSocket from "./sockets/tile.socket.js";
 
 const PORT = process.env.PORT;
 
@@ -10,8 +11,6 @@ const PORT = process.env.PORT;
 const server = http.createServer(app);
 
 // Attach socket
-// console.log("FRONTEND:", process.env.FRONTEND_ENDPOINT);
-
 const io = new Server(server, {
   cors: {
     origin: process.env.FRONTEND_ENDPOINT,
@@ -19,13 +18,7 @@ const io = new Server(server, {
 });
 
 // Socket connection
-io.on("connection", (socket) => {
-  console.log("User connected:", socket.id);
-
-  socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
-  });
-});
+tileSocket(io);
 
 pool.query("SELECT NOW()", (err, res) => {
   if (err) {
